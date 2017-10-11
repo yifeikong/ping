@@ -14,6 +14,14 @@ async def ping(request):
     return json(ret)
 
 if __name__ == '__main__':
-    ssl = {'cert': './cert.pem', 'key': './key.pem'}
-    app.run(host='0.0.0.0', port=8002, ssl=ssl, debug=True)
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--port', type=int, help="port to listen")
+    parser.add_argument('--ssl', action='store_true', help='use ssl or not')
+    args = parser.parse_args()
+    if args.ssl:
+        ssl = {'cert': './cert.pem', 'key': './key.pem'}
+        app.run(host='0.0.0.0', port=args.port, ssl=ssl, debug=True)
+    else:
+        app.run(host='0.0.0.0', port=args.port, debug=True)
 
