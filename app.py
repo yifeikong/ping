@@ -4,8 +4,6 @@
 from sanic import Sanic
 from sanic.response import json
 
-from datastore.proxy.consts import AnonymousType
-
 app = Sanic(__name__)
 
 @app.route('/')
